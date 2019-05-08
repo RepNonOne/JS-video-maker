@@ -1,0 +1,3 @@
+# download link
+	-> https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20190508-06ba478-win64-static.zip
+	-> you need confing a env variable to the folder extracted (bin folder)
