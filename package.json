@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/CripBoy/easy-video-maker#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "ffmpeg": "0.0.4",
+    "image-downloader": "^3.4.2",
+    "node-summary": "^1.2.0",
+    "unsplash-api": "^1.2.0",
     "videoshow": "^0.1.11"
   }
 }
