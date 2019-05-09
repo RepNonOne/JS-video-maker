@@ -28,6 +28,7 @@ var options = {
 module.exports.make = function(images){
   console.log('\nRendering video...')
   videoshow(images, options)
+  .audio('./sound/generated/sound.mp3')
   .save('./video/rendered/video.mp4')
   .on('start', function (command) {
     console.log('ffmpeg process started:', command)

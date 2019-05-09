@@ -4,6 +4,7 @@ const download = require('image-downloader');
 const resize = require('./resize');
 const uniqid = require('uniqid');
 const GoogleImages = require('google-images');
+
 // need google api key
 const client = new GoogleImages('', '');
 
@@ -23,7 +24,7 @@ fs.readdir(directory, (err, files) => {
 module.exports.search = function(categ){
     return new Promise(resolve => {
         // match photos by name
-        client.search(categ, {size: 'medium'}).then(photos => {
+        client.search(categ, {size: 'large'}).then(photos => {
             let pl = photos.length;
             let dl = 0;
             let dirs = [];
@@ -50,6 +51,7 @@ module.exports.search = function(categ){
                     }
                 })
                 .catch((err) => {
+                    dl += 1;
                     console.error(err);
                 });
             }
