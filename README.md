@@ -1,5 +1,7 @@
 # Easy video maker
 
+		usage: $npm start
+
  - Tools
 	 - [Videoshow - require ffmpeg ](https://www.npmjs.com/package/videoshow)
 	 - [Wikipedia API](#)
