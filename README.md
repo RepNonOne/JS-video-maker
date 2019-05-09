@@ -8,4 +8,4 @@
 	 - [Canvas Node - require Cairo](#)
 	 - [Summary Node - optional](#)
 	 
- - [Demo Video created by this bot](https://vimeo.com/user84747989/review/335034650/bdd6c098e6)
+ - [Demo Video created by this bot](https://vimeo.com/335034650)
