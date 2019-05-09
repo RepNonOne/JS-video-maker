@@ -1,43 +1,58 @@
 const fs = require('fs');
 const path = require('path');
-const unsplash = require('unsplash-api');
 const download = require('image-downloader');
+const resize = require('./resize');
+const uniqid = require('uniqid');
+const GoogleImages = require('google-images');
+// need google api key
+const client = new GoogleImages('', '');
 
 // remove all previous files
-const directory = './saved/';
+const directory = './images/saved/';
 
 fs.readdir(directory, (err, files) => {
-  if (err) throw err;
+    if (err) throw err;
 
-  for (const file of files) {
-    fs.unlink(path.join(directory, file), err => {
-      if (err) throw err;
-    });
-  }
+    for (const file of files) {
+        fs.unlink(path.join(directory, file), err => {
+          if (err) throw err;
+      });
+    }
 });
 
-// enter you key here
-unsplash.init('b757b829bbca1193d719b3116d36248dcabc3741c2f662906edcb1bfa297fce5');
+module.exports.search = function(categ){
+    return new Promise(resolve => {
+        // match photos by name
+        client.search(categ, {size: 'medium'}).then(photos => {
+            let pl = photos.length;
+            let dl = 0;
+            let dirs = [];
 
-// match photos by name
-unsplash.searchPhotos('band', null, null, null, function(error, photos, link) {
-    let pl = photos.length;
-    let dl = 0;
+            console.log('\ndonwloading images!')
 
-    console.log('donwloading images!\n')
+            //save all photos
+            for(e of photos){
+                download.image({
+                    url: e.url,
+                    dest: directory + uniqid() + '.jpg'
+                })
+                .then(({ filename, image }) => {
+                    dirs.push(filename), dl++;
 
-    //save all photos
-    for(e of photos){
-        download.image({
-            url: e.urls.regular,
-            dest: directory + e.id + '.jpg'
-        })
-        .then(({ filename, image }) => {
-            dl++;
-            console.log(`${dl}/${pl} donwloaded`);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-    }
-});		
+                    // send download status
+                    console.log(`\n${dl}/${pl} downloaded`);
+
+                    // return promise array
+                    if(dl > photos.length - 1){
+                        resize.start('./images/saved/', () => {
+                            resolve(dirs);
+                        });
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+            }
+        });   
+    });
+}

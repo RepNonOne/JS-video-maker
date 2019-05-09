@@ -17,10 +17,18 @@
   },
   "homepage": "https://github.com/CripBoy/easy-video-maker#readme",
   "dependencies": {
+    "@magenta/music": "^1.8.0",
     "axios": "^0.18.0",
+    "canvas": "^2.5.0",
     "ffmpeg": "0.0.4",
+    "gm": "^1.23.1",
+    "google-images": "^2.1.0",
+    "image-data-uri": "^2.0.0",
     "image-downloader": "^3.4.2",
     "node-summary": "^1.2.0",
+    "scribbletune": "^2.0.2",
+    "tone": "^13.4.9",
+    "uniqid": "^5.0.3",
     "unsplash-api": "^1.2.0",
     "videoshow": "^0.1.11"
   }

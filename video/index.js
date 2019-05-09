@@ -1,8 +1,9 @@
-var videoshow = require('videoshow')
+var videoshow = require('videoshow');
 
 var options = {
-  loop: 5,
-  captionDelay: 350,
+  fps: 25,
+  loop: 10,
+  captionDelay: 0,
   transition: true,
   useSubRipSubtitles: false, // Use ASS/SSA subtitles instead 
   subtitleStyle: {
@@ -24,30 +25,10 @@ var options = {
   }
 }
 
-var images = [
-  {
-    path: __dirname + '/images/demo.jpg',
-    caption: 'This is a sample subtitle'
-  }, {
-    path: __dirname + '/images/demo.jpg',
-    caption: 'Another sample text',
-    loop: 5
-  }, {
-    path: __dirname + '/images/demo.jpg',
-    caption: 'Fast caption',
-    captionStart: 2,
-    captionEnd: 3
-  }, {
-    path: __dirname + '/images/demo.jpg',
-    loop: 3
-  }, {
-    path: __dirname + '/images/demo.jpg',
-    caption: 'Bye bye'
-  }
-]
-
-videoshow(images, options)
-  .save('./rendered/video.mp4')
+module.exports.make = function(images){
+  console.log('\nRendering video...')
+  videoshow(images, options)
+  .save('./video/rendered/video.mp4')
   .on('start', function (command) {
     console.log('ffmpeg process started:', command)
   })
@@ -56,4 +37,5 @@ videoshow(images, options)
   })
   .on('end', function (output) {
     console.log('Video created in:', output)
-  })
+  });
+}

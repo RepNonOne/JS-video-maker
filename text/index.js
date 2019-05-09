@@ -10,39 +10,46 @@ const reader = readline.createInterface({
 const wiki_api = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=';
 const wikipedia_url = 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=';
 
-reader.question("What's you want to search?\n", answer => {
-	let pages, count = 0;
+module.exports.question = function(){
+    return new Promise(resolve => {
+        reader.question("What's you want to search?\n", answer => {
+            let pages, count = 0, data;
 
-    // wikipedia api
-    axios.get(wiki_api + answer).then(response => {
-    	pages = Object.values(response.data.query.pages).map(e => {
+            // wikipedia api
+            axios.get(wiki_api + answer).then(response => {
+                pages = Object.values(response.data.query.pages).map(e => {
 
-    		// send pages to coose
-    		console.log('.', count + 1, '|', e.title);
+                    // send pages to coose
+                    console.log('\n.', count + 1, '|', e.title);
 
-    		return {
-    			title: e.title,
-    			index: count++
-    		}
-    	});
+                    return {
+                        title: e.title,
+                        index: count++
+                    }
+                });
 
-    	reader.question("Choose a number:\n", number => {
-    		let page = pages[number - 1];
-    		let title = page.title.replace(/\s/g, '_');
+                reader.question("\nChoose a number:", number => {
+                    if(number > pages.length) throw 'number range error';
 
-    		// summary text
-    		axios.get(wikipedia_url + title).then(response => {
-    			let summary_text = Object.values(response.data.query.pages)[0].extract;
-    			let automatic, manual = summary_text.split('.');
+                    let page = pages[number - 1];
+                    let title = page.title.replace(/\s/g, '_');
 
-    			SummaryTool.summarize(page.title, summary_text, function(err, summary) {
-    				automatic = summary;
+                    // summary text
+                    axios.get(wikipedia_url + title).then(response => {
+                        let summary_text = Object.values(response.data.query.pages)[0].extract;
+                        let automatic, manual = summary_text.split('.');
 
-    				console.log(manual)
-    			});
-    		});
+                        SummaryTool.summarize(page.title, summary_text, function(err, summary) {
+                            if(err) throw err;
+                            automatic = summary;
 
-    		reader.close();
-    	});
+                            resolve({summary: manual, title: page.title});
+                        });
+                    });
+
+                    reader.close();
+                });
+            });
+        });
     });
-});
+}
