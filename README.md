@@ -1,11 +1,11 @@
 # Easy video maker
 
  - Tools
-	 - [Videoshow - require ffmepg ](https://www.npmjs.com/package/videoshow)
+	 - [Videoshow - require ffmpeg ](https://www.npmjs.com/package/videoshow)
 	 - [Wikipedia API](#)
 	 - [Google Images API](https://unsplash.com/)
 	 - [Youtube API - optional](#)
 	 - [Canvas Node - require Cairo](#)
 	 - [Summary Node - optional](#)
 	 
- - [Demo Video created by this bot](./video/rendered/video.mp4)
+ - [Demo Video created by this bot](https://vimeo.com/user84747989/review/335034650/bdd6c098e6)
