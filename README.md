@@ -1,13 +1,9 @@
-# Easy video maker
+## [Potigol Web Editor](#future)
+Olá! o Potigol Web Editor é uma ferramenta que lhe possibilitará  criação e compartilhamento de códigos e resoluções de atividades advindas da pseuda linguagem de programação [Potigol]([http://potigol.github.io/](http://potigol.github.io/)).
 
-		usage: $npm start
+### Mande seu desafio!
+Manda pra gente suas sugestões de atividades, a serem inseridas dentro da plataforma, elas serão classificadas de acordo com o seu nível de dificuldade.
 
- - Tools
-	 - [Videoshow - require ffmpeg ](https://www.npmjs.com/package/videoshow)
-	 - [Wikipedia API](#)
-	 - [Google Images API](https://unsplash.com/)
-	 - [Youtube API - optional](#)
-	 - [Canvas Node - require Cairo](#)
-	 - [Summary Node - optional](#)
-	 
- - [Demo Video created by this bot](https://vimeo.com/335034650)
+```javascript
+escreva "to fino"
+```
